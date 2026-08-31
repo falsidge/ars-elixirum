@@ -2,9 +2,9 @@ package dev.obscuria.elixirum.common.alchemy.brewing;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import dev.obscuria.elixirum.common.alchemy.PackedEffect;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirContents;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirRecipe;
-import dev.obscuria.elixirum.common.alchemy.PackedEffect;
 import dev.obscuria.elixirum.common.alchemy.essence.Essence;
 import dev.obscuria.elixirum.common.alchemy.ingredient.IngredientProperties;
 import dev.obscuria.elixirum.server.ServerAlchemy;

@@ -6,7 +6,7 @@ import dev.obscuria.elixirum.client.ClientAlchemy;
 import dev.obscuria.elixirum.common.alchemy.essence.Essence;
 import dev.obscuria.elixirum.registry.ElixirumDataComponents;
 import dev.obscuria.elixirum.registry.ElixirumItems;
-import dev.obscuria.core.api.ObscureAPI;
+import dev.obscuria.fragmentum.Fragmentum;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -113,14 +113,14 @@ public final class ElixirHolder
 
     public Optional<ItemStack> getCachedStack()
     {
-        return ObscureAPI.PLATFORM.isClient() && !isEmpty()
+        return Fragmentum.PLATFORM.isClient() && !isEmpty()
                 ? Optional.of(ClientAlchemy.getCache().getOrCreateStack(this))
                 : Optional.empty();
     }
 
     public ItemStack createStack(HolderGetter<Essence> getter)
     {
-        final var stack = ElixirumItems.ELIXIR.value().getDefaultInstance();
+        final var stack = ElixirumItems.ELIXIR.get().getDefaultInstance();
         stack.set(ElixirumDataComponents.ELIXIR_CONTENTS, recipe.brew(getter));
         return applyAppearance(stack);
     }

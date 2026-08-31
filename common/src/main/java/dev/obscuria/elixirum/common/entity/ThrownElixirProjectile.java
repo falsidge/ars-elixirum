@@ -32,13 +32,13 @@ public final class ThrownElixirProjectile extends ThrowableItemProjectile
 
     public ThrownElixirProjectile(Level level, LivingEntity entity)
     {
-        super(ElixirumEntityTypes.THROWN_ELIXIR.value(), entity, level);
+        super(ElixirumEntityTypes.THROWN_ELIXIR.get(), entity, level);
     }
 
     @Override
     protected Item getDefaultItem()
     {
-        return ElixirumItems.SPLASH_ELIXIR.value();
+        return ElixirumItems.SPLASH_ELIXIR.get();
     }
 
     @Override

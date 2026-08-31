@@ -28,7 +28,7 @@ public final class SplashElixirRecipe extends CustomRecipe
         for (var stack : input.items())
         {
             if (stack.isEmpty()) continue;
-            if (stack.is(ElixirumItems.ELIXIR.value()))
+            if (stack.is(ElixirumItems.ELIXIR.get()))
             {
                 elixirs += 1;
                 continue;
@@ -55,9 +55,9 @@ public final class SplashElixirRecipe extends CustomRecipe
                 .filter(stack -> stack.is(Items.GLASS_BOTTLE))
                 .count();
         final var contents = ElixirContents.get(input.items().stream()
-                .filter(stack -> stack.is(ElixirumItems.ELIXIR.value()))
+                .filter(stack -> stack.is(ElixirumItems.ELIXIR.get()))
                 .findFirst().orElse(ItemStack.EMPTY));
-        final var result = new ItemStack(ElixirumItems.SPLASH_ELIXIR.value(), bottles);
+        final var result = new ItemStack(ElixirumItems.SPLASH_ELIXIR.get(), bottles);
         return contents.split(bottles).set(result);
     }
 

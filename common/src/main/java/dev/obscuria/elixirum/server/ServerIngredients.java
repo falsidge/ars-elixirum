@@ -9,7 +9,7 @@ import dev.obscuria.elixirum.common.alchemy.ingredient.IngredientProperties;
 import dev.obscuria.elixirum.common.alchemy.ingredient.Ingredients;
 import dev.obscuria.elixirum.network.ClientboundIngredientsPayload;
 import dev.obscuria.elixirum.registry.ElixirumRegistries;
-import dev.obscuria.core.api.v1.common.ObscureNetworking;
+import dev.obscuria.fragmentum.content.network.FragmentumNetworking;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -38,7 +38,7 @@ public final class ServerIngredients extends Ingredients
 
     void syncWithPlayer(ServerPlayer player)
     {
-        ObscureNetworking.sendTo(player, ClientboundIngredientsPayload.create(this.pack()));
+        FragmentumNetworking.sendTo(player, ClientboundIngredientsPayload.create(this.pack()));
     }
 
     public void load()

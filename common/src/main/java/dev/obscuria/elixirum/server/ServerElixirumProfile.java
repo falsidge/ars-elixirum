@@ -9,7 +9,7 @@ import dev.obscuria.elixirum.common.alchemy.essence.Essence;
 import dev.obscuria.elixirum.network.ClientboundDiscoverPayload;
 import dev.obscuria.elixirum.network.ClientboundProfilePayload;
 import dev.obscuria.elixirum.network.ServerboundCollectionActionPayload;
-import dev.obscuria.core.api.v1.common.ObscureNetworking;
+import dev.obscuria.fragmentum.content.network.FragmentumNetworking;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryOps;
@@ -36,7 +36,7 @@ public final class ServerElixirumProfile extends ElixirumProfile
 
     public void syncWithPlayer()
     {
-        ObscureNetworking.sendTo(player, ClientboundProfilePayload.create(this.pack()));
+        FragmentumNetworking.sendTo(player, ClientboundProfilePayload.create(this.pack()));
     }
 
     public List<ElixirHolder> getCollection()
@@ -97,7 +97,7 @@ public final class ServerElixirumProfile extends ElixirumProfile
                 value == null ? Sets.newHashSet() : value,
                 set -> {
                     if (!set.add(essence) || !sync) return;
-                    ObscureNetworking.sendTo(player, ClientboundDiscoverPayload.create(item, essence));
+                    FragmentumNetworking.sendTo(player, ClientboundDiscoverPayload.create(item, essence));
                 }));
     }
 

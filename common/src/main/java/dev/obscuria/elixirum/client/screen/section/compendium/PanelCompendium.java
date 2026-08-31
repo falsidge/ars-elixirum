@@ -2,9 +2,9 @@ package dev.obscuria.elixirum.client.screen.section.compendium;
 
 import com.google.common.collect.Maps;
 import dev.obscuria.elixirum.Elixirum;
-import dev.obscuria.elixirum.client.screen.tool.Property;
-import dev.obscuria.elixirum.client.screen.tool.ClickAction;
 import dev.obscuria.elixirum.client.screen.container.*;
+import dev.obscuria.elixirum.client.screen.tool.ClickAction;
+import dev.obscuria.elixirum.client.screen.tool.Property;
 import dev.obscuria.elixirum.client.screen.widget.Text;
 import dev.obscuria.elixirum.registry.ElixirumSounds;
 import net.minecraft.Util;

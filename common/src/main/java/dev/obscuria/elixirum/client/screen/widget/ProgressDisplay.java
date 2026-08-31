@@ -1,9 +1,9 @@
 package dev.obscuria.elixirum.client.screen.widget;
 
-import dev.obscuria.core.api.v1.common.text.TextWrapper;
 import dev.obscuria.elixirum.Elixirum;
 import dev.obscuria.elixirum.client.ClientAlchemy;
 import dev.obscuria.elixirum.client.screen.ElixirumScreen;
+import dev.obscuria.elixirum.client.screen.TextSeparator;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -57,10 +57,7 @@ public final class ProgressDisplay extends AbstractWidget
                 ClientAlchemy.getProfile().getTotalDiscoveredEssences(),
                 ClientAlchemy.getIngredients().getTotalEssences(),
                 ClientAlchemy.getIngredients().getTotalIngredients());
-        tooltip.addAll(TextWrapper.create(description)
-                .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
-                .withMaxLength(30)
-                .build());
+        tooltip.addAll(TextSeparator.getSeparatedText(description, 30, Style.EMPTY.withColor(ChatFormatting.GRAY)));
         return tooltip;
     }
 }

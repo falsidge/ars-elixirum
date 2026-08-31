@@ -31,6 +31,6 @@ public abstract class MixinHumanoidArmorLayer<T extends LivingEntity, M extends 
                                          A model,
                                          CallbackInfo info)
     {
-        if (entity.getItemBySlot(slot).is(ElixirumItems.ALCHEMIST_EYE.value())) info.cancel();
+        if (entity.getItemBySlot(slot).is(ElixirumItems.ALCHEMIST_EYE.get())) info.cancel();
     }
 }

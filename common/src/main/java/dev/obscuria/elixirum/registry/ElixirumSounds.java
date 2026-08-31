@@ -1,7 +1,6 @@
 package dev.obscuria.elixirum.registry;
 
 import dev.obscuria.elixirum.Elixirum;
-import dev.obscuria.core.api.v1.common.ObscureRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
@@ -23,8 +22,7 @@ public interface ElixirumSounds
     register(final String name)
     {
         final var value = SoundEvent.createVariableRangeEvent(Elixirum.key(name));
-        ObscureRegistry.register(
-                Elixirum.MODID,
+        Elixirum.REGISTRAR.register(
                 BuiltInRegistries.SOUND_EVENT,
                 Elixirum.key(name),
                 () -> value);
@@ -34,8 +32,7 @@ public interface ElixirumSounds
     private static Holder<SoundEvent>
     registerHolder(final String name)
     {
-        return ObscureRegistry.register(
-                Elixirum.MODID,
+        return Elixirum.REGISTRAR.register(
                 BuiltInRegistries.SOUND_EVENT,
                 Elixirum.key(name),
                 () -> SoundEvent.createVariableRangeEvent(Elixirum.key(name))).holder();

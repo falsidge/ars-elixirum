@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 final class PanelCollection extends PanelContainer
 {
-    private @Nullable SubElixirsGrid elixirsGrid;
+    private final @Nullable SubElixirsGrid elixirsGrid;
 
     public PanelCollection(int x, int y, int width, int height)
     {

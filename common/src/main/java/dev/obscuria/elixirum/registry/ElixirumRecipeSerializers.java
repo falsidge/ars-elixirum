@@ -3,7 +3,6 @@ package dev.obscuria.elixirum.registry;
 import dev.obscuria.elixirum.Elixirum;
 import dev.obscuria.elixirum.common.recipe.SplashElixirRecipe;
 import dev.obscuria.elixirum.common.recipe.WitchTotemOfUndyingRecipe;
-import dev.obscuria.core.api.v1.common.ObscureRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,8 +17,7 @@ public interface ElixirumRecipeSerializers
     simple(final String name, SimpleCraftingRecipeSerializer.Factory<T> factory)
     {
         final var value = new SimpleCraftingRecipeSerializer<>(factory);
-        ObscureRegistry.register(
-                Elixirum.MODID,
+        Elixirum.REGISTRAR.register(
                 BuiltInRegistries.RECIPE_SERIALIZER,
                 Elixirum.key(name),
                 () -> value);

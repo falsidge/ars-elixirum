@@ -42,7 +42,7 @@ public final class SessionCache
             if (value != null) return value;
             return essenceGetter()
                     .map(holder::createStack)
-                    .orElseGet(() -> ElixirumItems.ELIXIR.value().getDefaultInstance());
+                    .orElseGet(() -> ElixirumItems.ELIXIR.get().getDefaultInstance());
         });
     }
 

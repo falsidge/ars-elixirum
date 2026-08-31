@@ -4,7 +4,6 @@ import dev.obscuria.elixirum.Elixirum;
 import dev.obscuria.elixirum.common.alchemy.ExtractContents;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirContents;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirStyle;
-import dev.obscuria.core.api.v1.common.ObscureRegistry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -33,8 +32,7 @@ public interface ElixirumDataComponents
     register(final String name, UnaryOperator<DataComponentType.Builder<T>> builder)
     {
         final var component = builder.apply(DataComponentType.builder()).build();
-        ObscureRegistry.register(
-                Elixirum.MODID,
+        Elixirum.REGISTRAR.register(
                 BuiltInRegistries.DATA_COMPONENT_TYPE,
                 Elixirum.key(name),
                 () -> component);

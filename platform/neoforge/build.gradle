@@ -3,6 +3,10 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+repositories {
+    mavenLocal()
+}
+
 neoForge {
     version = neoforge_version
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -39,7 +43,9 @@ neoForge {
 }
 
 dependencies {
-    api rootProject.files('libs/obscure_api-neoforge-1.21.1-16.jar')
+    // api rootProject.files('libs/obscure_api-neoforge-1.21.1-16.jar')
+    api("dev.obscuria:fragmentum-neoforge:${fragmentum_version}")
+
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

@@ -1,7 +1,6 @@
 package dev.obscuria.elixirum.client;
 
 import com.google.common.collect.Sets;
-import dev.obscuria.core.api.v1.common.ObscureNetworking;
 import dev.obscuria.elixirum.common.alchemy.ElixirumProfile;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirHolder;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirRecipe;
@@ -9,6 +8,7 @@ import dev.obscuria.elixirum.common.alchemy.essence.Essence;
 import dev.obscuria.elixirum.network.ClientboundDiscoverPayload;
 import dev.obscuria.elixirum.network.ClientboundProfilePayload;
 import dev.obscuria.elixirum.network.ServerboundProfilePayload;
+import dev.obscuria.fragmentum.content.network.FragmentumNetworking;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -20,70 +20,82 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-public final class ClientElixirumProfile extends ElixirumProfile {
+public final class ClientElixirumProfile extends ElixirumProfile
+{
     private boolean changed;
 
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return collection.isEmpty();
     }
 
-    public boolean isDiscovered(Item item, Holder<Essence> essence) {
+    public boolean isDiscovered(Item item, Holder<Essence> essence)
+    {
         final var essences = discoveredEssences.get(item);
         return essences != null && essences.contains(essence);
     }
 
     @Contract(pure = true)
-    public @Unmodifiable List<ElixirHolder> getCollection() {
+    public @Unmodifiable List<ElixirHolder> getCollection()
+    {
         return List.copyOf(collection);
     }
 
-    public Optional<ElixirHolder> searchInCollection(ElixirRecipe recipe) {
+    public Optional<ElixirHolder> searchInCollection(ElixirRecipe recipe)
+    {
         for (var holder : getCollection())
             if (holder.is(recipe))
                 return Optional.of(holder);
         return Optional.empty();
     }
 
-    public boolean isOnCollection(ElixirRecipe recipe) {
+    public boolean isOnCollection(ElixirRecipe recipe)
+    {
         return collection.stream().anyMatch(holder -> holder.is(recipe));
     }
 
-    public boolean addToCollection(ElixirHolder holder) {
+    public boolean addToCollection(ElixirHolder holder)
+    {
         if (isOnCollection(holder.getRecipe())) return false;
         this.collection.add(holder);
         this.changed = true;
         return true;
     }
 
-    public boolean updateInCollection(ElixirHolder holder) {
+    public boolean updateInCollection(ElixirHolder holder)
+    {
         if (!isOnCollection(holder.getRecipe())) return false;
         this.collection.replaceAll(saved -> saved.isSame(holder) ? holder : saved);
         this.changed = true;
         return true;
     }
 
-    public boolean removeFromCollection(ElixirHolder holder) {
+    public boolean removeFromCollection(ElixirHolder holder)
+    {
         if (!isOnCollection(holder.getRecipe())) return false;
         this.collection.remove(holder);
         this.changed = true;
         return true;
     }
 
-    public void syncWithServer() {
+    public void syncWithServer()
+    {
         final var changed = new AtomicBoolean(this.changed);
         final Consumer<ElixirHolder> consumer = holder -> changed.set(true);
         this.getCollection().forEach(holder -> holder.consumeChanges(consumer));
         if (!changed.get()) return;
         this.changed = false;
-        ObscureNetworking.sendToServer(ServerboundProfilePayload.create(packCollection()));
+        FragmentumNetworking.sendToServer(ServerboundProfilePayload.create(packCollection()));
     }
 
-    void handle(ClientboundProfilePayload packet) {
+    void handle(ClientboundProfilePayload packet)
+    {
         ClientAlchemy.clearCache();
         this.unpack(packet.content());
     }
 
-    void handle(ClientboundDiscoverPayload packet) {
+    void handle(ClientboundDiscoverPayload packet)
+    {
         this.discoveredEssences.compute(packet.item(), (key, value) -> Util.make(
                 value == null ? Sets.newHashSet() : value,
                 set -> set.add(packet.essence())));

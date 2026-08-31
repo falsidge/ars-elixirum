@@ -29,18 +29,18 @@ final class ModModelGenerator extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generators) {
         generateElixirVariants(generators);
         generateBaseElixir(generators);
-        generators.generateFlatItem(ElixirumItems.ALCHEMIST_EYE.value(), ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(ElixirumItems.GLASS_CAULDRON.value(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ElixirumItems.ALCHEMIST_EYE.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ElixirumItems.GLASS_CAULDRON.get(), ModelTemplates.FLAT_ITEM);
         generators.generateLayeredItem(
-                ModelLocationUtils.getModelLocation(ElixirumItems.SPLASH_ELIXIR.value()),
+                ModelLocationUtils.getModelLocation(ElixirumItems.SPLASH_ELIXIR.get()),
                 Elixirum.key("item/splash_elixir"),
                 Elixirum.key("item/splash_elixir_overlay"));
         generators.generateLayeredItem(
-                ModelLocationUtils.getModelLocation(ElixirumItems.WITCH_TOTEM_OF_UNDYING.value()),
+                ModelLocationUtils.getModelLocation(ElixirumItems.WITCH_TOTEM_OF_UNDYING.get()),
                 Elixirum.key("item/witch_totem_of_undying"),
                 Elixirum.key("item/witch_totem_of_undying_overlay"));
         generators.generateLayeredItem(
-                ModelLocationUtils.getModelLocation(ElixirumItems.EXTRACT.value()),
+                ModelLocationUtils.getModelLocation(ElixirumItems.EXTRACT.get()),
                 Elixirum.key("item/extract"),
                 Elixirum.key("item/extract_overlay"));
     }
@@ -54,7 +54,7 @@ final class ModModelGenerator extends FabricModelProvider {
     }
 
     private void generateBaseElixir(ItemModelGenerators generators) {
-        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(ElixirumItems.ELIXIR.value()),
+        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(ElixirumItems.ELIXIR.get()),
                 TextureMapping.layer0(Items.GLASS_BOTTLE), generators.output,
                 (location, map) -> {
                     var base = ModelTemplates.FLAT_ITEM.createBaseTemplate(location, map);

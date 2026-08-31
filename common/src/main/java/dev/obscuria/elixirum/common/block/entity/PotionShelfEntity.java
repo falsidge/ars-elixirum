@@ -34,7 +34,7 @@ public final class PotionShelfEntity extends BlockEntity
 
     public PotionShelfEntity(BlockPos pos, BlockState state)
     {
-        this(ElixirumBlockEntityTypes.POTION_SHELF.value(), pos, state);
+        this(ElixirumBlockEntityTypes.POTION_SHELF.get(), pos, state);
     }
 
     public ItemStack getFirstStack()

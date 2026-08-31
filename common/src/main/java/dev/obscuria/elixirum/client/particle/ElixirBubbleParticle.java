@@ -1,8 +1,8 @@
 package dev.obscuria.elixirum.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.obscuria.core.api.v1.common.easing.Easing;
 import dev.obscuria.elixirum.common.particle.ElixirBubbleParticleOptions;
+import dev.obscuria.fragmentum.content.util.easing.Easing;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -37,7 +37,7 @@ public final class ElixirBubbleParticle extends Particle
     public void render(VertexConsumer ignored, Camera camera, float delta)
     {
         final var lifeFactor = Mth.clamp((this.age + delta) / this.lifetime, 0, 1);
-        final var scale = 0.1f * Easing.EASE_OUT_CUBIC.reversed().compute(lifeFactor);
+        final var scale = 0.1f * Easing.EASE_OUT_CUBIC.reverse().compute(lifeFactor);
         this.alpha = Easing.EASE_IN_CUBIC.mergeOut(Easing.EASE_OUT_CUBIC, 0.1f).compute(lifeFactor);
 
         final var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();

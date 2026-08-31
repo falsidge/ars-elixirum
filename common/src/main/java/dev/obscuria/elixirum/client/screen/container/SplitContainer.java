@@ -1,8 +1,8 @@
 package dev.obscuria.elixirum.client.screen.container;
 
 import dev.obscuria.elixirum.client.screen.ElixirumScreen;
-import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import dev.obscuria.elixirum.client.screen.HierarchicalWidget;
+import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 

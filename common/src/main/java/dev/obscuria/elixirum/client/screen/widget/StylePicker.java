@@ -1,11 +1,11 @@
 package dev.obscuria.elixirum.client.screen.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.obscuria.core.api.v1.common.text.TextWrapper;
 import dev.obscuria.elixirum.Elixirum;
 import dev.obscuria.elixirum.client.ClientAlchemy;
 import dev.obscuria.elixirum.client.screen.ElixirumScreen;
 import dev.obscuria.elixirum.client.screen.HierarchicalWidget;
+import dev.obscuria.elixirum.client.screen.TextSeparator;
 import dev.obscuria.elixirum.client.screen.container.GridContainer;
 import dev.obscuria.elixirum.client.screen.tool.ClickAction;
 import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
@@ -36,7 +36,8 @@ public abstract class StylePicker<T> extends GridContainer
     {
         this.values().forEach(value -> this.addChild(new Element(value))
                 .setClickSound(ElixirumSounds.UI_CLICK_2)
-                .setClickAction(ClickAction.<Element>left(slot -> {
+                .setClickAction(ClickAction.<Element>left(slot ->
+                {
                     if (holder == null) return false;
                     if (this.isLocked(slot.value)) return false;
                     this.selected = slot.value;
@@ -67,7 +68,8 @@ public abstract class StylePicker<T> extends GridContainer
 
     protected void acceptTooltip(T value)
     {
-        ElixirumScreen.tooltipProvider = () -> {
+        ElixirumScreen.tooltipProvider = () ->
+        {
             var tooltip = Lists.<Component>newArrayList();
             tooltip.add(getElementName(value));
             if (isLocked(value))
@@ -134,10 +136,7 @@ public abstract class StylePicker<T> extends GridContainer
             final var required = value.getRequiredProgress(ClientAlchemy.getIngredients().getTotalEssences());
             final var discovered = ClientAlchemy.getProfile().getTotalDiscoveredEssences();
             final var wanting = required - discovered;
-            return TextWrapper.create(Component.translatable("elixirum.style.locked", wanting))
-                    .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
-                    .withMaxLength(24)
-                    .build();
+            return TextSeparator.getSeparatedText(Component.translatable("elixirum.style.locked", wanting), 24, Style.EMPTY.withColor(ChatFormatting.DARK_GRAY));
         }
     }
 
@@ -195,10 +194,7 @@ public abstract class StylePicker<T> extends GridContainer
             final var required = value.getRequiredProgress(ClientAlchemy.getIngredients().getTotalEssences());
             final var discovered = ClientAlchemy.getProfile().getTotalDiscoveredEssences();
             final var wanting = required - discovered;
-            return TextWrapper.create(Component.translatable("elixirum.style.locked", wanting))
-                    .withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
-                    .withMaxLength(24)
-                    .build();
+            return TextSeparator.getSeparatedText(Component.translatable("elixirum.style.locked", wanting), 24, Style.EMPTY.withColor(ChatFormatting.GRAY));
         }
     }
 

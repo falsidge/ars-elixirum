@@ -1,10 +1,5 @@
 package dev.obscuria.elixirum;
 
-import dev.obscuria.core.api.ObscureAPI;
-import dev.obscuria.core.api.v1.common.ObscureNetworking;
-import dev.obscuria.core.api.v1.common.ObscureRegistry;
-import dev.obscuria.core.api.v1.server.ObscureServerEvents;
-import dev.obscuria.core.api.v1.server.ObscureServerRegistry;
 import dev.obscuria.elixirum.client.ClientAlchemy;
 import dev.obscuria.elixirum.common.alchemy.elixir.ConfiguredElixir;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirPrefix;
@@ -16,6 +11,13 @@ import dev.obscuria.elixirum.registry.*;
 import dev.obscuria.elixirum.server.ServerAlchemy;
 import dev.obscuria.elixirum.server.commands.EssenceCommand;
 import dev.obscuria.elixirum.server.commands.RegenerateCommand;
+import dev.obscuria.elixirum.server.hooks.MinecraftServerHooks;
+import dev.obscuria.fragmentum.Fragmentum;
+import dev.obscuria.fragmentum.content.network.FragmentumNetworking;
+import dev.obscuria.fragmentum.content.network.PayloadRegistrar;
+import dev.obscuria.fragmentum.content.registry.FragmentumRegistry;
+import dev.obscuria.fragmentum.content.registry.Registrar;
+import dev.obscuria.fragmentum.server.FragmentumServerRegistry;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
@@ -33,6 +35,8 @@ public final class Elixirum
     public static final Logger LOG = LoggerFactory.getLogger(DISPLAY_NAME);
     public static final int WATER_COLOR = FastColor.ARGB32.opaque(-13083194);
     public static final Style STYLE = Style.EMPTY.withFont(Elixirum.key("elixirum"));
+    public static final Registrar REGISTRAR = FragmentumRegistry.registrar(MODID);
+    public static final PayloadRegistrar PAYLOAD_REGISTRAR = FragmentumNetworking.registrar(MODID);
 
     public static ResourceLocation key(String name)
     {
@@ -55,7 +59,7 @@ public final class Elixirum
 
     public static Ingredients getIngredients()
     {
-        return ObscureAPI.PLATFORM.isClient()
+        return Fragmentum.PLATFORM.isClient()
                 ? ClientAlchemy.getIngredients()
                 : ServerAlchemy.getIngredients();
     }
@@ -77,36 +81,36 @@ public final class Elixirum
 
         registerEvents();
 
-        ObscureServerRegistry.registerCommand(EssenceCommand::register);
-        ObscureServerRegistry.registerCommand(RegenerateCommand::register);
+        FragmentumServerRegistry.registerCommand(EssenceCommand::register);
+        FragmentumServerRegistry.registerCommand(RegenerateCommand::register);
 
-        ObscureRegistry.newSyncedDataRegistry(MODID, ElixirumRegistries.ESSENCE, Essence.DIRECT_CODEC);
-        ObscureRegistry.newSyncedDataRegistry(MODID, ElixirumRegistries.ELIXIR_PREFIX, ElixirPrefix.DIRECT_CODEC);
-        ObscureRegistry.newSyncedDataRegistry(MODID, ElixirumRegistries.CONFIGURED_ELIXIR, ConfiguredElixir.DIRECT_CODEC);
-        ObscureRegistry.newDataRegistry(MODID, ElixirumRegistries.INGREDIENT_PRESET, IngredientPreset.DIRECT_CODEC);
+        REGISTRAR.createSyncedDataRegistry(ElixirumRegistries.ESSENCE, () -> Essence.DIRECT_CODEC);
+        REGISTRAR.createSyncedDataRegistry(ElixirumRegistries.ELIXIR_PREFIX, () -> ElixirPrefix.DIRECT_CODEC);
+        REGISTRAR.createSyncedDataRegistry(ElixirumRegistries.CONFIGURED_ELIXIR, () -> ConfiguredElixir.DIRECT_CODEC);
+        REGISTRAR.createDataRegistry(ElixirumRegistries.INGREDIENT_PRESET, () -> IngredientPreset.DIRECT_CODEC);
 
-        ObscureNetworking.registerClientbound(MODID,
+        PAYLOAD_REGISTRAR.registerClientbound(
                 ClientboundDiscoverPayload.class,
                 ClientboundDiscoverPayload.TYPE,
                 ClientboundDiscoverPayload.STREAM_CODEC,
                 ClientboundDiscoverPayload::handle);
-        ObscureNetworking.registerClientbound(MODID,
+        PAYLOAD_REGISTRAR.registerClientbound(
                 ClientboundIngredientsPayload.class,
                 ClientboundIngredientsPayload.TYPE,
                 ClientboundIngredientsPayload.STREAM_CODEC,
                 ClientboundIngredientsPayload::handle);
-        ObscureNetworking.registerClientbound(MODID,
+        PAYLOAD_REGISTRAR.registerClientbound(
                 ClientboundProfilePayload.class,
                 ClientboundProfilePayload.TYPE,
                 ClientboundProfilePayload.STREAM_CODEC,
                 ClientboundProfilePayload::handle);
 
-        ObscureNetworking.registerServerbound(MODID,
+        PAYLOAD_REGISTRAR.registerServerbound(
                 ServerboundCollectionActionPayload.class,
                 ServerboundCollectionActionPayload.TYPE,
                 ServerboundCollectionActionPayload.STREAM_CODEC,
                 ServerboundCollectionActionPayload::handle);
-        ObscureNetworking.registerServerbound(MODID,
+        PAYLOAD_REGISTRAR.registerServerbound(
                 ServerboundProfilePayload.class,
                 ServerboundProfilePayload.TYPE,
                 ServerboundProfilePayload.STREAM_CODEC,
@@ -115,9 +119,9 @@ public final class Elixirum
 
     private static void registerEvents()
     {
-        ObscureServerEvents.SERVER_STARTED.register(ServerAlchemy::whenServerStarted);
-        ObscureServerEvents.START_DATA_PACK_RELOAD.register(((server, manager) -> ServerAlchemy.whenResourcesReloaded(server)));
-        ObscureServerEvents.AFTER_SAVE.register(((server, flush, force) -> ServerAlchemy.whenServerSaved(server)));
-        ObscureServerEvents.SERVER_STOPPING.register(ServerAlchemy::whenServerStopped);
+        MinecraftServerHooks.SERVER_STARTED.register(ServerAlchemy::whenServerStarted);
+        MinecraftServerHooks.START_DATA_PACK_RELOAD.register(ServerAlchemy::whenResourcesReloaded);
+        MinecraftServerHooks.AFTER_SAVE.register(ServerAlchemy::whenServerSaved);
+        MinecraftServerHooks.SERVER_STOPPED.register(ServerAlchemy::whenServerStopped);
     }
 }

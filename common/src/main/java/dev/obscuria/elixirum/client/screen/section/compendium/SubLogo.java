@@ -2,8 +2,8 @@ package dev.obscuria.elixirum.client.screen.section.compendium;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.obscuria.elixirum.Elixirum;
-import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import dev.obscuria.elixirum.client.screen.HierarchicalWidget;
+import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

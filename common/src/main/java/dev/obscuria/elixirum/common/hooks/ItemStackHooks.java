@@ -24,7 +24,7 @@ public final class ItemStackHooks
 
         if (player == null
                 || !player.level().isClientSide
-                || !player.getItemBySlot(EquipmentSlot.HEAD).is(ElixirumItems.ALCHEMIST_EYE.value())) return;
+                || !player.getItemBySlot(EquipmentSlot.HEAD).is(ElixirumItems.ALCHEMIST_EYE.get())) return;
         final var properties = ClientAlchemy.getIngredients().getProperties(stack.getItem());
         if (properties.isEmpty()) return;
         final var getter = player.registryAccess().lookupOrThrow(ElixirumRegistries.ESSENCE);

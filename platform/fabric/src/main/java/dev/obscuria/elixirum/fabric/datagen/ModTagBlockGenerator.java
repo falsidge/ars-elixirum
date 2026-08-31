@@ -25,12 +25,12 @@ final class ModTagBlockGenerator extends FabricTagProvider.BlockTagProvider {
                 .add(reverseLookup(Blocks.MAGMA_BLOCK));
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(reverseLookup(ElixirumBlocks.GLASS_CAULDRON.value()));
+                .add(reverseLookup(ElixirumBlocks.GLASS_CAULDRON.get()));
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(reverseLookup(ElixirumBlocks.GLASS_CAULDRON.value()));
+                .add(reverseLookup(ElixirumBlocks.GLASS_CAULDRON.get()));
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(reverseLookup(ElixirumBlocks.POTION_SHELF.value()));
+                .add(reverseLookup(ElixirumBlocks.POTION_SHELF.get()));
     }
 }

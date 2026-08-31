@@ -65,7 +65,7 @@ public final class GlassCauldronBlock extends BaseEntityBlock
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type)
     {
-        return createTickerHelper(type, ElixirumBlockEntityTypes.GLASS_CAULDRON.value(), GlassCauldronEntity::tick);
+        return createTickerHelper(type, ElixirumBlockEntityTypes.GLASS_CAULDRON.get(), GlassCauldronEntity::tick);
     }
 
     @Override

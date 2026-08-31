@@ -81,12 +81,12 @@ public enum ContentsType
         page.addChild(new SubText(Component.literal("Ars Elixirum was created in just three weeks for the CurseForge modjam. As it is a very complex mod, some planned content had to be postponed due to the deadline. However, the mod will be receiving frequent and substantial content updates soon, and your participation, feedback, and ideas can help shape the future of Ars Elixirum! Join our Discord server (button at the end of the page) to share your thoughts and stay updated on the latest developments.")));
         page.addChild(new SubText(Component.literal("Here are some features we are prioritizing for upcoming updates:")));
         final var steps = page.addChild(new ListContainer().setSeparation(2));
-        steps.addChild(new SubStepItem(ElixirumItems.GLASS_CAULDRON.value(), Component.literal("Catastrophes and Reactions: The contents of your cauldron won't always be stable during brewing. Expect dangerous reactions that will force you to carefully plan your alchemical lab to create truly powerful elixirs!")));
+        steps.addChild(new SubStepItem(ElixirumItems.GLASS_CAULDRON.get(), Component.literal("Catastrophes and Reactions: The contents of your cauldron won't always be stable during brewing. Expect dangerous reactions that will force you to carefully plan your alchemical lab to create truly powerful elixirs!")));
         steps.addChild(new SubStepItem(Items.PAPER, Component.literal("Ancient Recipes: Unearth ancient elixir recipes as treasures, offering unique effects that cannot be achieved through other means.")));
         steps.addChild(new SubStepItem(Items.PAPER, Component.literal("Global Spells: Find fragments of ancient scrolls to brew spells that temporarily alter the entire world! ")));
         steps.addChild(new SubStepItem(Items.WRITABLE_BOOK, Component.literal("Personalized Recipe Books: Combine recipes from your collection into recipe book items that can be shared with other players.")));
-        steps.addChild(new SubStepItem(ElixirumItems.ELIXIR.value(), Component.literal("More Elixir Effects for Every Situation: Expand your potion repertoire with a wider variety of effects.")));
-        steps.addChild(new SubStepItem(ElixirumItems.WITCH_TOTEM_OF_UNDYING.value(), Component.literal("Versatile Elixir Applications: Explore new ways to utilize elixirs, tailored to different situations and environments.")));
+        steps.addChild(new SubStepItem(ElixirumItems.ELIXIR.get(), Component.literal("More Elixir Effects for Every Situation: Expand your potion repertoire with a wider variety of effects.")));
+        steps.addChild(new SubStepItem(ElixirumItems.WITCH_TOTEM_OF_UNDYING.get(), Component.literal("Versatile Elixir Applications: Explore new ways to utilize elixirs, tailored to different situations and environments.")));
         page.addChild(new SubText(Component.literal("We look forward to your feedback and contributions as we continue to develop Ars Elixirum.")));
         page.addChild(new DiscordButton());
     }

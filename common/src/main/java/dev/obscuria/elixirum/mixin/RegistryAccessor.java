@@ -6,10 +6,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(BuiltInRegistries.class)
-public interface RegistryAccessor {
+public interface RegistryAccessor
+{
 
     @Accessor("WRITABLE_REGISTRY")
-    static WritableRegistry<WritableRegistry<?>> getRoot() {
+    static WritableRegistry<WritableRegistry<?>> getRoot()
+    {
         throw new UnsupportedOperationException();
     }
 }

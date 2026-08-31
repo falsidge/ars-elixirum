@@ -57,7 +57,7 @@ public final class GlassCauldronEntity extends BlockEntity
 
     public GlassCauldronEntity(BlockPos pos, BlockState state)
     {
-        super(ElixirumBlockEntityTypes.GLASS_CAULDRON.value(), pos, state);
+        super(ElixirumBlockEntityTypes.GLASS_CAULDRON.get(), pos, state);
     }
 
     public boolean isEmpty()
@@ -117,7 +117,7 @@ public final class GlassCauldronEntity extends BlockEntity
     {
         final var contents = this.mixer.getResult(essenceGetter());
         if (contents.isEmpty()) return ItemStack.EMPTY;
-        final var stack = ElixirumItems.ELIXIR.value().getDefaultInstance();
+        final var stack = ElixirumItems.ELIXIR.get().getDefaultInstance();
         stack.set(ElixirumDataComponents.ELIXIR_CONTENTS, contents);
         if (player instanceof ServerPlayer serverPlayer)
         {

@@ -1,8 +1,8 @@
 package dev.obscuria.elixirum.client.screen.section.compendium;
 
 import dev.obscuria.elixirum.client.screen.ElixirumPalette;
-import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import dev.obscuria.elixirum.client.screen.HierarchicalWidget;
+import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.MultiLineLabel;

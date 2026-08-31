@@ -3,6 +3,10 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+repositories {
+    mavenLocal()
+}
+
 neoForge {
     neoFormVersion = neo_form_version
 
@@ -20,7 +24,7 @@ dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
-    api rootProject.files('libs/obscure_api-common-1.21.1-16-api.jar')
+    api("dev.obscuria:fragmentum-api:${fragmentum_version}")
 }
 
 configurations {

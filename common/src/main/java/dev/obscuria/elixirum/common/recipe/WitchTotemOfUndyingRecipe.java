@@ -27,7 +27,7 @@ public final class WitchTotemOfUndyingRecipe extends CustomRecipe
         for (var stack : input.items())
         {
             if (stack.isEmpty()) continue;
-            if (stack.is(ElixirumItems.ELIXIR.value()))
+            if (stack.is(ElixirumItems.ELIXIR.get()))
             {
                 elixirs += 1;
                 continue;
@@ -46,9 +46,9 @@ public final class WitchTotemOfUndyingRecipe extends CustomRecipe
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider provider)
     {
         final var contents = ElixirContents.get(input.items().stream()
-                .filter(stack -> stack.is(ElixirumItems.ELIXIR.value()))
+                .filter(stack -> stack.is(ElixirumItems.ELIXIR.get()))
                 .findFirst().orElse(ItemStack.EMPTY));
-        final var result = new ItemStack(ElixirumItems.WITCH_TOTEM_OF_UNDYING.value());
+        final var result = new ItemStack(ElixirumItems.WITCH_TOTEM_OF_UNDYING.get());
         return contents.set(result);
     }
 

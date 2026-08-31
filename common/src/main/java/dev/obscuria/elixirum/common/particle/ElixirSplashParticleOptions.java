@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.obscuria.elixirum.registry.ElixirumParticleTypes;
-import dev.obscuria.core.api.v1.common.ObscureFactory;
+import dev.obscuria.fragmentum.FragmentumFactory;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -39,7 +39,7 @@ public class ElixirSplashParticleOptions extends ElixirParticleOptions
 
     public ParticleType<ElixirSplashParticleOptions> getType()
     {
-        return ElixirumParticleTypes.ELIXIR_SPLASH.value();
+        return ElixirumParticleTypes.ELIXIR_SPLASH.get();
     }
 
     static
@@ -52,6 +52,6 @@ public class ElixirSplashParticleOptions extends ElixirParticleOptions
                 ByteBufCodecs.VECTOR3F, ElixirSplashParticleOptions::getColor,
                 ByteBufCodecs.FLOAT, ElixirSplashParticleOptions::getScale,
                 ElixirSplashParticleOptions::new);
-        TYPE = ObscureFactory.createParticleType(true, CODEC, STREAM_CODEC);
+        TYPE = FragmentumFactory.newParticleType(true, CODEC, STREAM_CODEC);
     }
 }

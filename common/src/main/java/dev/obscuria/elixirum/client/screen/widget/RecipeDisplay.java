@@ -1,11 +1,11 @@
 package dev.obscuria.elixirum.client.screen.widget;
 
 import dev.obscuria.elixirum.client.screen.ElixirumScreen;
-import dev.obscuria.elixirum.client.screen.tool.Property;
-import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
 import dev.obscuria.elixirum.client.screen.HierarchicalWidget;
 import dev.obscuria.elixirum.client.screen.container.GridContainer;
 import dev.obscuria.elixirum.client.screen.container.SpoilerContainer;
+import dev.obscuria.elixirum.client.screen.tool.GlobalTransform;
+import dev.obscuria.elixirum.client.screen.tool.Property;
 import dev.obscuria.elixirum.common.alchemy.elixir.ElixirRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

@@ -54,7 +54,7 @@ public final class BrewingStandHooks
             {
                 final var stack = items.get(i);
                 if (!stack.is(Items.GLASS_BOTTLE)) continue;
-                final var extract = ElixirumItems.EXTRACT.value().getDefaultInstance();
+                final var extract = ElixirumItems.EXTRACT.get().getDefaultInstance();
                 extract.set(ElixirumDataComponents.EXTRACT_CONTENTS,
                         new ExtractContents(Optional.of(ingredientItem), essence, weight));
                 items.set(i, extract);

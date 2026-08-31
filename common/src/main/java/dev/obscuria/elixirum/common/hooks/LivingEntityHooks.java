@@ -22,13 +22,13 @@ public final class LivingEntityHooks
         for (var hand : InteractionHand.values())
         {
             final var stack = entity.getItemInHand(hand);
-            if (!stack.is(ElixirumItems.WITCH_TOTEM_OF_UNDYING.value())) continue;
+            if (!stack.is(ElixirumItems.WITCH_TOTEM_OF_UNDYING.get())) continue;
 
             final var totem = stack.copy();
             stack.shrink(1);
             if (entity instanceof ServerPlayer player)
             {
-                player.awardStat(Stats.ITEM_USED.get(ElixirumItems.WITCH_TOTEM_OF_UNDYING.value()), 1);
+                player.awardStat(Stats.ITEM_USED.get(ElixirumItems.WITCH_TOTEM_OF_UNDYING.get()), 1);
                 CriteriaTriggers.USED_TOTEM.trigger(player, totem);
                 entity.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             }
