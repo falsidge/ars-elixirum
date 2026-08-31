@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
@@ -19,6 +20,7 @@ public final class NeoElixirumClient {
         ElixirumClient.init();
     }
 
+    @EventBusSubscriber(modid = Elixirum.MODID)
     public static final class Events {
         @SubscribeEvent
         private static void onClientTick(ClientTickEvent.Pre event) {
